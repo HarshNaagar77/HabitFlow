@@ -1,0 +1,9 @@
+/* Base styles: variables, resets, typography */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}

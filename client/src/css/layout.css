@@ -1,0 +1,10 @@
+/* Layout styles: containers, grid, flex utilities */
+
+.container {
+  max-width: 90vw;
+  margin: 0 auto;
+  padding: 24px;
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
