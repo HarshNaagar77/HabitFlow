@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/components.css';
-import axios from 'axios';
+import API from '../api';
 
 export default function FriendProfile({ friendId, onBack }) {
   const [friend, setFriend] = useState(null);
@@ -12,7 +12,7 @@ export default function FriendProfile({ friendId, onBack }) {
     const fetchFriend = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`/api/users/${friendId}/profile`, {
+  const res = await API.get(`/api/users/${friendId}/profile`, {
           headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
         });
         setFriend(res.data.user);

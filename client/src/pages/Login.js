@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import '../css/components.css';
-import axios from 'axios';
+import API from '../api';
 
 export default function Login({ onLogin }) {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -15,7 +15,7 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('/api/auth/login', form);
+  const res = await API.post('/api/auth/login', form);
       localStorage.setItem('token', res.data.token);
       onLogin(res.data.user);
     } catch (err) {

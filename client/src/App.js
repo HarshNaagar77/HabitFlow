@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from './api';
 import Register from './pages/Register';
 import Login from './pages/Login';
 
@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token && !user) {
-      axios.get('/api/auth/me', {
+  API.get('/api/auth/me', {
         headers: { 'Authorization': 'Bearer ' + token }
       })
         .then(res => {

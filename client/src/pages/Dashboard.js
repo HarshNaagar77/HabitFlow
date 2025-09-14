@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import '../css/components.css';
 import HabitForm from '../components/HabitForm';
-import axios from 'axios';
+import API from '../api';
 
 // Helper to get days in current month
 function getDaysInMonth(year, month) {
@@ -34,7 +34,7 @@ export default function Dashboard({ user }) {
   const fetchHabits = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/api/habits', {
+  const res = await API.get('/api/habits', {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setHabits(res.data);
@@ -51,7 +51,7 @@ export default function Dashboard({ user }) {
 
   const handleAdd = async (form) => {
     try {
-      await axios.post('/api/habits', form, {
+  await API.post('/api/habits', form, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setShowForm(false);
@@ -68,7 +68,7 @@ export default function Dashboard({ user }) {
 
   const handleUpdate = async (form) => {
     try {
-      await axios.put(`/api/habits/${editHabit._id}`, form, {
+  await API.put(`/api/habits/${editHabit._id}`, form, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setEditHabit(null);
@@ -82,7 +82,7 @@ export default function Dashboard({ user }) {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this habit?')) return;
     try {
-      await axios.delete(`/api/habits/${id}`, {
+  await API.delete(`/api/habits/${id}`, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       fetchHabits();
@@ -93,7 +93,7 @@ export default function Dashboard({ user }) {
 
   const handleCheckIn = async (id) => {
     try {
-      await axios.post(`/api/habits/${id}/checkin`, {}, {
+  await API.post(`/api/habits/${id}/checkin`, {}, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       fetchHabits();

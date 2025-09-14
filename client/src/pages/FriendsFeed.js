@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import '../css/components.css';
 import FriendProfile from './FriendProfile';
-import axios from 'axios';
+import API from '../api';
 
 export default function FriendsFeed() {
   const [search, setSearch] = useState('');
@@ -18,7 +18,7 @@ export default function FriendsFeed() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.get(`/api/users/search?q=${encodeURIComponent(search)}`, {
+  const res = await API.get(`/api/users/search?q=${encodeURIComponent(search)}`, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setResults(res.data);
@@ -30,7 +30,7 @@ export default function FriendsFeed() {
   // Follow user
   const handleFollow = async (userId) => {
     try {
-      await axios.post(`/api/users/${userId}/follow`, {}, {
+  await API.post(`/api/users/${userId}/follow`, {}, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       fetchFriends();
@@ -42,7 +42,7 @@ export default function FriendsFeed() {
   // Unfollow user
   const handleUnfollow = async (userId) => {
     try {
-      await axios.post(`/api/users/${userId}/unfollow`, {}, {
+  await API.post(`/api/users/${userId}/unfollow`, {}, {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       fetchFriends();
@@ -54,7 +54,7 @@ export default function FriendsFeed() {
   // Fetch friends
   const fetchFriends = async () => {
     try {
-      const res = await axios.get('/api/users/friends', {
+  const res = await API.get('/api/users/friends', {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setFriends(res.data);
@@ -66,7 +66,7 @@ export default function FriendsFeed() {
   // Fetch friends feed
   const fetchFeed = async () => {
     try {
-      const res = await axios.get('/api/users/friends/feed', {
+  const res = await API.get('/api/users/friends/feed', {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       });
       setFeed(res.data);
