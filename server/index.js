@@ -9,7 +9,13 @@ import userRoutes from './routes/users.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://habitflow-1.onrender.com',
+    'http://localhost:3000'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 
